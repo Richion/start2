@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<title>Let's Chat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body class="w3-container">
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  var socket = io();
+</script>
+<script>
+	$(function(){
+		$('form').submit(function(e){
+			e.preventDefault();
+			socket.emit('chat',$('#o').val());
+			$('#o').val('');
+			return false;
+			
+			
+		});
+		socket.on('chat',function(msg){
+
+			$('#message').append($('<li>').text(msg));
+		})
+		
+	
+	
+	})
+	
+	
+</script>
+
+
+<div class="w3-panel w3-card w3-light-grey">
+  <h3>Let's Chat!!</h3>
+
+
+
+    <ul class="w3-ul w3-card-4" style="width:100%" id = "message">	      
+    
+</ul>
+
+ 
+</div>
+
+	<form>
+		<input class="w3-input w3-border" type="text" placeholder="輸入文字" style="width:100%" id="o"><button class="w3-btn w3-blue" style="width:100%">Register</button>
+	</form>
+
+</body>
+</html>
